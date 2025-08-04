@@ -59,22 +59,6 @@ Assembles segments into chapters and a complete book with metadata tagging. Appl
 
 ---
 
-## Design Principles & Modularity
-
-**Clear interfaces**  
-- Typed, schema-validated objects between agents; strict separation of content understanding (LLM) and signal processing (audio tooling).
-
-**Provider and model abstraction**  
-- Pluggable voice providers; centrally configured models; tiering by task complexity, latency, and budget.
-
-**Parallelization & resilience**  
-- Scene-level parallel work; persisted intermediates for resumability; graceful degradation (fallback voices, skip-music mode).
-
-**Quality controls**  
-- Acting-direction consistency checks, speaker continuity checks, and per-scene loudness targets; corridor limits on music gain and fades to maintain dialogue primacy.
-
----
-
 ## Music Agent: Behavior & Policy
 
 **Inputs**: Scene-grouped segments with speaker labels, text, and acting directions.
@@ -89,14 +73,6 @@ Assembles segments into chapters and a complete book with metadata tagging. Appl
 
 ---
 
-## Operations & Deployment Considerations
-- **Throughput**: Scene-level batching plus parallel workers achieve practical real-time multiples on book-length inputs.  
-- **Cost discipline**: Tier models by task complexity; cache intermediates; enable skip modes.  
-- **Observability**: Track per-phase timings, error rates, retries; log music decisions and normalization deltas.  
-- **Content safety**: Provider safeguards plus internal filters for toxic content prior to rendering.
-
----
-
 ## Typical User Flow
 1. Ingest a PDF and run extraction with structure preservation.  
 2. Build a Character Registry (extraction + enrichment).  
@@ -105,14 +81,6 @@ Assembles segments into chapters and a complete book with metadata tagging. Appl
 5. Generate TTS for all segments.  
 6. Integrate music via the Music Agent; apply normalization and fades.  
 7. Assemble chapters and export the mastered audiobook with metadata and reports.
-
----
-
-## Roadmap (Selected Enhancements)
-- Adaptive pacing for pauses, breaths, and overlap in multi-voice scenes  
-- Style transfer: persistent delivery style per character across chapters  
-- Interactive review: web-based diff and punch-in replacement for targeted fixes  
-- Parallel scene render: global prosody coordination across concurrent scenes
 
 ---
 
